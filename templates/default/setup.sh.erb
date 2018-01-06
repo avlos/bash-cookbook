@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Path to the central configuration
+export MY_BASH="<%= target_dir %>"
+
+<% @config_files.each do |file| %>
+ln -svif <%= "$MY_BASH/#{file} #{home}/.#{file}" %>
+<% end %>

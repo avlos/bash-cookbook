@@ -1,0 +1,18 @@
+#####################
+## Path Extensions ##
+#####################
+
+# PATH Config
+# Custom paths
+<%#TODO: turn this into an attribute? %>
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
+<% if node["platform"].eql? "mac_os_x" %>
+# PATH Config for osx coreutils
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+# MANPATH Config
+export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+<% elsif node["platform"].eql? "ubuntu" %>
+
+<% end %>

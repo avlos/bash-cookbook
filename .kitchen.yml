@@ -1,0 +1,48 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  username: obi-wan
+  hostname: tatooine
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-16.04
+
+suites:
+  - name: developer
+    run_list:
+      - recipe[bash::default]
+    verifier:
+      inspec_tests:
+        - test/developer
+    attributes:
+      bash:
+        user: obi-wan
+        user_type: developer
+  - name: admin
+    run_list:
+      - recipe[bash::default]
+    verifier:
+      inspec_tests:
+        - test/admin
+    attributes:
+      bash:
+        user: obi-wan
+        user_type: admin
+  - name: root
+    run_list:
+      - recipe[bash::default]
+    verifier:
+      inspec_tests:
+        - test/root
+    attributes:
+      bash:
+        user: root
+        user_type: root

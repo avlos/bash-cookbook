@@ -1,0 +1,15 @@
+image: docker:latest
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - apk update
+  - apk upgrade
+  - apk --update add git build-base ruby ruby-dev libffi-dev ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler libstdc++ tzdata bash ca-certificates libxml2-dev libxslt-dev yajl-dev gmp-dev make docker
+  - ruby -v
+  - bundle install
+
+kitchen:
+  script:
+    - bundle exec kitchen test
